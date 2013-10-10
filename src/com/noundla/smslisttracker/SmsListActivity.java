@@ -53,9 +53,9 @@ public class SmsListActivity extends Activity {
 		mListview = (ListView)findViewById(R.id.listView1);
 		mTotalUnits = (TextView)findViewById(R.id.unitsTV);
 		loadIntent(getIntent());
-//		SMSObserver observer = new SMSObserver(mHandler,this);  
+		SMSObserver observer = new SMSObserver(mHandler,this);  
         // REGISTER ContetObserver 
-//        this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, observer);
+        this.getContentResolver().registerContentObserver(Uri.parse("content://sms/"), true, observer);
         
 //        retriveSentSmsFromDefaultApp();
         

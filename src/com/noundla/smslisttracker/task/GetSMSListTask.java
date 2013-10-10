@@ -56,7 +56,7 @@ public class GetSMSListTask extends AsyncTask<Void, Void, ArrayList<SMSMessage>>
 	}
 
 
-	private ArrayList<SMSMessage> getSmsListDetailsFromDeviceApp() {
+	private synchronized ArrayList<SMSMessage> getSmsListDetailsFromDeviceApp() {
 		ArrayList<SMSMessage> smsList = new ArrayList<SMSMessage>();
 		Cursor managedCursor = null;
 		try{

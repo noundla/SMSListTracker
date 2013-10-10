@@ -16,6 +16,7 @@ import android.provider.ContactsContract.PhoneLookup;
 import com.noundla.smslisttracker.SMSListDetails;
 import com.noundla.smslisttracker.SMSMessage;
 import com.noundla.smslisttracker.projectconfig.Constants;
+import com.noundla.smslisttracker.projectconfig.Util;
 
 
 
@@ -128,9 +129,13 @@ public class SMSListDBHelper extends SQLiteOpenHelper{
 			insStmt = db.compileStatement("INSERT INTO " + SMSListTable.TABLE_NAME + " ("+SMSListTable.smsId+","+SMSListTable.phoneNumber+","+SMSListTable.threadID+","+SMSListTable.type+","+SMSListTable.date+","+SMSListTable.smsParts+") VALUES (?, ?, ?, ?, ?, ?);");
 			db.beginTransaction();
 			try {
-
+				if(smsList!=null && smsList.size()>0){
+					//saving the date of last message
+					Util.saveLongInSP(mContext, Constants.SP_LAST_SMS_DATE, smsList.get(0).getDate());
+				}
 				for(SMSMessage smsMessage : smsList) {
 					try{
+						
 						// Add the data for each column
 						insStmt.bindLong(1, smsMessage.getId());
 						insStmt.bindString(2, smsMessage.getNumber());
@@ -138,8 +143,9 @@ public class SMSListDBHelper extends SQLiteOpenHelper{
 						insStmt.bindLong(4, smsMessage.getType());
 						insStmt.bindLong(5, smsMessage.getDate());
 						insStmt.bindLong(6, smsMessage.getSmsParts());
-
+						
 						insStmt.executeInsert();    //  should really check value here!
+						
 					}catch(Exception e){
 						e.printStackTrace();
 					}

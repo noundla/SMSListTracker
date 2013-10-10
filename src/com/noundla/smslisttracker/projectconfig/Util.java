@@ -30,7 +30,7 @@ public class Util {
     /**
      * Retrieve Integer value from SharedPreference for the given key
      */
-    public static void saveIntInSP(Context context, String key, int value) {
+    private static void saveIntInSP(Context context, String key, int value) {
         SharedPreferences preferences = context.getSharedPreferences(
                 SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -52,7 +52,7 @@ public class Util {
     /**
      * Retrieve integer value from SharedPreference for the given key
      */
-    public static int getIntFromSP(Context _activity, String key) {
+    private static int getIntFromSP(Context _activity, String key) {
         SharedPreferences preferences = _activity.getSharedPreferences(
                 SHARED_PREFERENCES_NAME, android.content.Context.MODE_PRIVATE);
         return preferences.getInt(key, -1);
